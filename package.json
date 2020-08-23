@@ -2,11 +2,13 @@
   "name": "gpoopmap-server",
   "version": "1.0.0",
   "description": "대똥여지도 server",
-  "main": "index.js",
+  "main": "init.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev:server": "nodemon --exec babel-node src/init.js",
-    "build:server": "babel server --out-dir build"
+    "dev": "nodemon --exec babel-node src/init.js",
+    "build": "babel src --out-dir build",
+    "start": "PRODUCTION=true node build/init.js",
+    "prestart": "npm run build"
   },
   "repository": {
     "type": "git",
