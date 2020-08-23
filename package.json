@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "nodemon --exec babel-node src/init.js",
     "build": "babel src --out-dir build",
+    "prebuild": "rm -rf build",
     "start": "node build/init.js",
     "prestart": "npm run build"
   },
