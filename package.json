@@ -1,0 +1,49 @@
+{
+  "name": "gpoopmap-server",
+  "version": "1.0.0",
+  "description": "대똥여지도 server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev:server": "nodemon --exec babel-node src/init.js",
+    "build:server": "babel server --out-dir build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hshine1226/gpoopmap-server.git"
+  },
+  "author": "JUNHYUK CHOI",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hshine1226/gpoopmap-server/issues"
+  },
+  "homepage": "https://github.com/hshine1226/gpoopmap-server#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.10.5",
+    "@babel/node": "^7.0.0",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-env": "^7.1.5",
+    "aws-sdk": "^2.713.0",
+    "axios": "^0.19.2",
+    "babel-loader": "^8.0.0-beta.6",
+    "body-parser": "^1.19.0",
+    "connect-mongo": "^3.2.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "helmet": "^3.23.3",
+    "mongoose": "^5.9.24",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.2",
+    "multer-s3": "^2.9.0",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^6.0.1"
+  }
+}
