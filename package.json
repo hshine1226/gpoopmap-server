@@ -4,7 +4,6 @@
   "description": "대똥여지도 server",
   "main": "init.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon --exec babel-node src/init.js",
     "build": "babel src --out-dir build",
     "start": "PRODUCTION=true node build/init.js",
