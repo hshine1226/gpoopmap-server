@@ -5,7 +5,7 @@ import app from "./app";
 
 dotenv.config();
 
-const PORT = process.env.PORT | 4000;
+const PORT = process.env.PORT || 4000;
 
 console.log("PORT: ", PORT);
 
