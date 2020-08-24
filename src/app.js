@@ -19,17 +19,16 @@ const app = express();
 
 const CookieStore = MongoStore(session);
 
+app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(helmet()); // Express App에 도움을 주는 미들웨어
 app.use(cookieParser()); // Session을 다루기 위한 미들웨어
 app.use(bodyParser.json()); // 서버가 json을 이해하게 해주는 미들웨어
 app.use(bodyParser.urlencoded({ extended: true })); // 서버가 urlencoded를 이해하게 해주는 미들웨어
 app.use(morgan("dev")); // Logging에 도움을 주는 미들웨어
-app.use(cors());
 
 app.use(
   session({
-    // secret: process.env.COOKIE_SECRET,
-    secret: "]-+~'I=U,.!wUOYKPj'cSx4%[Bgp`&",
+    secret: process.env.COOKIE_SECRET,
     resave: true,
     saveUninitialized: false,
     store: new CookieStore({ mongooseConnection: mongoose.connection }),
