@@ -16,22 +16,22 @@ export const postJoin = async (req, res) => {
   }
 };
 
-export const postLogin = (req, res, next) => {
+export const postLogin = (req, res) => {
   passport.authenticate("local", (error, user, info) => {
     if (error) {
       console.log(error);
     }
     if (user) {
-      req.login(user, (error) => {
+      req.logIn(user, (error) => {
         if (error) {
           console.log(error);
         }
-        res.send({ success: true, user });
+        res.send({ user: req.user });
       });
     } else {
-      res.send({ success: false });
+      res.send({});
     }
-  })(req, res, next);
+  })(req, res);
 };
 
 export const logout = (req, res) => {
@@ -55,10 +55,10 @@ export const getUser = async (req, res) => {
   const user = await User.findOne({ email });
 
   if (user) {
-    res.send({ user, message: "User Exist" });
+    res.send({ user });
     res.status(200);
   } else {
-    res.send({ message: "User Doesn't Exist" });
+    res.send({ user: null });
     res.status(400);
   }
 };
@@ -87,6 +87,8 @@ export const postToilet = async (req, res) => {
 
       toilet.save();
       res.status(200);
+    } else {
+      res.status(400);
     }
   } catch (error) {
     res.status(400);
@@ -120,9 +122,8 @@ export const getNearToilets = async (req, res) => {
 };
 
 export const updateUser = async (req, res) => {
-  console.log("updateUser", req.file);
   const {
-    body: { name, email },
+    body: { name },
     file,
     params: { id },
   } = req;
@@ -133,13 +134,6 @@ export const updateUser = async (req, res) => {
     user.avatarUrl = file.location;
     user.save();
     res.send(user);
-
-    // const updatedUser = await User.findByIdAndUpdate(id, {
-    //   name,
-    //   email,
-    //   avatarUrl: file.location ? file.location : null,
-    // });
-    // res.send(updatedUser);
   } catch (error) {
     console.log(error);
   }
