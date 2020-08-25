@@ -15,7 +15,7 @@ import MongoStore from "connect-mongo";
 
 import "./passport";
 
-const allowList = ["http://localhost:3000", "https://gpoopmap.netlify.app/"];
+const allowList = ["https://gpoopmap.netlify.app", "http://localhost:3000"];
 var corsOptionsDelegate = function (req, callback) {
   console.log(req.header("Origin"));
   var corsOptions;
