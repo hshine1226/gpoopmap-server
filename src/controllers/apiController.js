@@ -68,6 +68,9 @@ export const postToilet = async (req, res) => {
     body: { lat, lng, name, type, memo },
   } = req;
 
+  console.log(req.body);
+  console.log(req.user);
+
   try {
     // 로그인한 유저만 화장실 등록 가능
     if (req.user) {
