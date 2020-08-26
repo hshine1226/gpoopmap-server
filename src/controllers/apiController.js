@@ -70,8 +70,6 @@ export const postToilet = async (req, res) => {
   } = req;
 
   try {
-    console.log(req.user);
-
     if (req.user) {
       const toilet = await Toilet({
         type,
@@ -89,6 +87,8 @@ export const postToilet = async (req, res) => {
       toilet.save();
 
       res.send(toilet);
+    } else {
+      res.status(400);
     }
   } catch (error) {
     res.status(400);
