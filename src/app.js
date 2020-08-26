@@ -41,12 +41,18 @@ app.use(bodyParser.json()); // 서버가 json을 이해하게 해주는 미들�
 app.use(bodyParser.urlencoded({ extended: true })); // 서버가 urlencoded를 이해하게 해주는 미들웨어
 app.use(morgan("dev")); // Logging에 도움을 주는 미들웨어
 
+app.set("trust proxy", 1); //trust first proxy
+
 app.use(
   session({
     secret: process.env.COOKIE_SECRET,
     resave: true,
     saveUninitialized: false,
     store: new CookieStore({ mongooseConnection: mongoose.connection }),
+    cookie: {
+      httpOnly: true,
+      secure: true,
+    },
   })
 );
 
@@ -54,7 +60,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Routers
-app.use(routes.home, globalRouter);
+app.use(routes.home, cors(corsOptionsDelegate), globalRouter);
 app.use(routes.api, cors(corsOptionsDelegate), apiRouter);
 
 export default app;
