@@ -27,6 +27,7 @@ export const postLogin = (req, res) => {
           console.log(error);
         }
         res.send({ user: req.user });
+        console.log(user);
       });
     } else {
       res.send({});
@@ -68,11 +69,9 @@ export const postToilet = async (req, res) => {
     body: { lat, lng, name, type, memo },
   } = req;
 
-  console.log(req.body);
-  console.log(req.user);
-
   try {
-    // 로그인한 유저만 화장실 등록 가능
+    console.log(req.user);
+
     if (req.user) {
       const toilet = await Toilet({
         type,
@@ -81,17 +80,15 @@ export const postToilet = async (req, res) => {
         location: {
           coordinates: [lng, lat],
         },
-        creator: req.user.id,
+        creator: req.user._id,
         imageUrl: req.file ? req.file.location : "",
       });
 
       req.user.toilets.push(toilet.id);
       req.user.save();
-
       toilet.save();
-      res.status(200);
-    } else {
-      res.status(400);
+
+      res.send(toilet);
     }
   } catch (error) {
     res.status(400);
@@ -99,6 +96,16 @@ export const postToilet = async (req, res) => {
   } finally {
     res.end();
   }
+};
+
+export const getToilet = async (req, res) => {
+  const {
+    params: { id },
+  } = req;
+  console.log(id);
+
+  const toilet = await Toilet.findById(id);
+  console.log(toilet);
 };
 
 export const getNearToilets = async (req, res) => {
