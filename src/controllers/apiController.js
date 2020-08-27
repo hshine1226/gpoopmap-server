@@ -4,33 +4,44 @@ import User from "../models/User";
 
 export const postJoin = async (req, res) => {
   const {
-    body: { name, email, password },
+    body: { name, email, password, passwordConfirm },
   } = req;
 
   try {
-    const user = await User({ name, email });
-    await User.register(user, password);
-    res.send({ success: true });
+    const user = await User.findOne({ email });
+    if (user) {
+      res.status(400).send({ error: "User exist." });
+    }
+    if (password !== passwordConfirm) {
+      res.status(400).send("Invalid confirm password.");
+    } else {
+      const user = await User({ name, email });
+      await User.register(user, password);
+      res.send({ user });
+    }
   } catch (err) {
-    res.status(400);
+    res.status(400).send("An error has occured. Please try again.");
   }
 };
 
 export const postLogin = (req, res) => {
   passport.authenticate("local", (error, user, info) => {
     if (error) {
-      console.log(error);
+      res
+        .status(400)
+        .send({ error: "An error has occured. Please try again." });
     }
     if (user) {
       req.logIn(user, (error) => {
         if (error) {
-          console.log(error);
+          res
+            .status(400)
+            .send({ error: "An error has occured. Please try again." });
         }
         res.send({ user: req.user });
-        console.log(user);
       });
     } else {
-      res.send({});
+      res.status(400).send({ error: "User does not exist." });
     }
   })(req, res);
 };
@@ -39,16 +50,12 @@ export const logout = (req, res) => {
   try {
     req.logout();
     res.send({ success: true });
-  } catch {
-    res.send({ success: false });
+  } catch (error) {
+    res.status(400).send({ error: "Failed logout." });
   }
 };
 
-export const getMe = async (req, res) => {
-  res.send({ user: req.user });
-};
-
-export const getUser = async (req, res) => {
+export const getUserByEmail = async (req, res) => {
   const {
     query: { email },
   } = req;
@@ -57,10 +64,8 @@ export const getUser = async (req, res) => {
 
   if (user) {
     res.send({ user });
-    res.status(200);
   } else {
-    res.send({ user: null });
-    res.status(400);
+    res.status(400).send({ error: "User does not exist." });
   }
 };
 
@@ -86,15 +91,12 @@ export const postToilet = async (req, res) => {
       req.user.save();
       toilet.save();
 
-      res.send(toilet);
+      res.send({ toilet });
     } else {
-      res.status(400);
+      res.status(400).send({ error: "Login status is required." });
     }
   } catch (error) {
-    res.status(400);
-    console.log(error);
-  } finally {
-    res.end();
+    res.status(400).send({ error: "An error has occured. Please try again." });
   }
 };
 
@@ -102,22 +104,25 @@ export const getToilet = async (req, res) => {
   const {
     params: { id },
   } = req;
-  console.log(id);
 
-  const toilet = await Toilet.findById(id);
-  console.log(toilet);
+  try {
+    const toilet = await Toilet.findById(id);
+    res.send({ toilet });
+  } catch (error) {
+    res.status(400).send({ error: "An error has occured. Please try again" });
+  }
 };
 
 export const getNearToilets = async (req, res) => {
   const {
-    query: { lat, lng },
+    query: { lat, lng, maxDistance },
   } = req;
 
   try {
-    const toilet = await Toilet.find({
+    const toilets = await Toilet.find({
       location: {
         $near: {
-          $maxDistance: 1000,
+          $maxDistance: parseInt(maxDistance, 10),
           $geometry: {
             type: "Point",
             coordinates: [lng, lat],
@@ -125,9 +130,9 @@ export const getNearToilets = async (req, res) => {
         },
       },
     }).populate("creator");
-    res.send(toilet);
+    res.send({ toilets });
   } catch (error) {
-    console.log(error);
+    res.status(400).send({ error: "An error has occured. Please try again." });
   }
 };
 
@@ -141,10 +146,12 @@ export const updateUser = async (req, res) => {
   try {
     const user = await User.findById(id);
     user.name = name;
-    user.avatarUrl = file.location;
+    if (file?.location) {
+      user.avatarUrl = file.location;
+    }
     user.save();
-    res.send(user);
+    res.send({ user });
   } catch (error) {
-    console.log(error);
+    res.status(400).send({ error: "An error has occured. Please try again." });
   }
 };
