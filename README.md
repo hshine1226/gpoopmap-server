@@ -30,7 +30,9 @@
 
 1. Request
 
-`POST /api/join`
+```http
+POST /api/join
+```
 
 2. Parameter
 
@@ -45,7 +47,7 @@
 
 - Success
 
-```shell
+```json
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -63,7 +65,7 @@ Content-Type: application/json
 
 - Fail
 
-```shell
+```json
 HTTP/1.1 400 BAD REQUEST
 Content-Type: application/json
 {
@@ -75,7 +77,9 @@ Content-Type: application/json
 
 1. Request
 
-`POST /api/login`
+```http
+POST /api/login
+```
 
 2. Parameter
 
@@ -88,7 +92,7 @@ Content-Type: application/json
 
 - Success
 
-```shell
+```json
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -106,7 +110,7 @@ Content-Type: application/json
 
 - Fail
 
-```shell
+```json
 HTTP/1.1 400 BAD REQUEST
 Content-Type: application/json
 {
@@ -118,7 +122,9 @@ Content-Type: application/json
 
 1. Request
 
-`GET /api/logout`
+```http
+GET /api/logout
+```
 
 2. Parameter
 
@@ -130,7 +136,7 @@ Content-Type: application/json
 
 - Success
 
-```shell
+```json
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -140,7 +146,7 @@ Content-Type: application/json
 
 - Fail
 
-```shell
+```json
 HTTP/1.1 400 BAD REQUEST
 Content-Type: application/json
 {
@@ -152,7 +158,9 @@ Content-Type: application/json
 
 1. Request
 
-`GET /api/users/user`
+```http
+GET /api/users/user
+```
 
 2. Parameter
 
@@ -164,7 +172,7 @@ Content-Type: application/json
 
 - Success
 
-```shell
+```json
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -182,7 +190,7 @@ Content-Type: application/json
 
 - Fail
 
-```shell
+```json
 HTTP/1.1 400 BAD REQUEST
 Content-Type: application/json
 {
@@ -194,7 +202,9 @@ Content-Type: application/json
 
 1. Request
 
-`GET /api/users/user/:id`
+```http
+GET /api/users/user/:id
+```
 
 2. Parameter
 
@@ -209,7 +219,7 @@ Content-Type: application/json
 
 - Success
 
-```shell
+```json
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -227,7 +237,7 @@ Content-Type: application/json
 
 - Fail
 
-```shell
+```json
 HTTP/1.1 400 BAD REQUEST
 Content-Type: application/json
 {
@@ -239,7 +249,9 @@ Content-Type: application/json
 
 1. Request
 
-`POST /api/toilets/toilet`
+```http
+POST /api/toilets/toilet
+```
 
 2. Parameter
 
@@ -256,7 +268,7 @@ Content-Type: application/json
 
 - Success
 
-```shell
+```json
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -279,7 +291,7 @@ Content-Type: application/json
 
 - Fail
 
-```shell
+```json
 HTTP/1.1 400 BAD REQUEST
 Content-Type: application/json
 {
@@ -291,7 +303,9 @@ Content-Type: application/json
 
 1. Request
 
-`GET /api/toilets/toilet:id`
+```http
+GET /api/toilets/toilet:id
+```
 
 2. Parameter
 
@@ -303,7 +317,7 @@ Content-Type: application/json
 
 - Success
 
-```shell
+```json
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -326,7 +340,7 @@ Content-Type: application/json
 
 - Fail
 
-```shell
+```json
 HTTP/1.1 400 BAD REQUEST
 Content-Type: application/json
 {
@@ -338,7 +352,9 @@ Content-Type: application/json
 
 1. Request
 
-`GET /api/toilets/nearby`
+```http
+GET /api/toilets/nearby
+```
 
 2. Parameter
 
@@ -352,7 +368,7 @@ Content-Type: application/json
 
 - Success
 
-```shell
+```json
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
@@ -364,7 +380,7 @@ Content-Type: application/json
 
 - Fail
 
-```shell
+```json
 HTTP/1.1 400 BAD REQUEST
 Content-Type: application/json
 {
