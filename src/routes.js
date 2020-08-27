@@ -6,11 +6,10 @@ const API = "/api";
 const JOIN = "/join";
 const LOGIN = "/login";
 const LOGOUT = "/logout";
-const GET_USER = "/users/user";
-const USER = "/users/:id";
-const ME = "/me";
-const POST_TOILET = "/toilet";
-const GET_TOILET = "/toilet/:id";
+const GET_USER_BY_EMAIL = "/users/user";
+const USER = "/users/user/:id";
+const POST_TOILET = "/toilets/toilet";
+const GET_TOILET = "/toilets/toilet/:id";
 const NEAR_TOILETS = "/toilets/nearby";
 
 const routes = {
@@ -22,11 +21,10 @@ const routes = {
   join: JOIN,
   login: LOGIN,
   logout: LOGOUT,
-  me: ME,
   postToilet: POST_TOILET,
   getToilet: GET_TOILET,
   nearToilets: NEAR_TOILETS,
-  getUser: GET_USER,
+  getUserByEmail: GET_USER_BY_EMAIL,
   user: USER,
 };
 
