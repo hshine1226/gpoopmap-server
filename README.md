@@ -9,6 +9,7 @@
 - NodeJS
 - PassportJS
 - Babel
+- Webpack
 - Express
 - MongoDB
 - Mongoose
